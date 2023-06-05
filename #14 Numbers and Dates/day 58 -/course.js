@@ -68,3 +68,8 @@ console.log((23).toFixed(3))
 console.log((23.8).toFixed(0))
 console.log((2.3453).toFixed(2))
 console.log((-34.26).toFixed(5))
+console.log('')
+
+console.log(10 % 2)// 10 = 2 * 5 + 0 
+
+console.log(1354234513452345135241453245n)
