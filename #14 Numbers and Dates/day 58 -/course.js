@@ -63,3 +63,8 @@ console.log('')
 console.log(Math.floor(-23.3)) // -24
 console.log(Math.floor(-23.9)) // -24
 console.log('')
+
+console.log((23).toFixed(0))
+console.log((5).toFixed(3))
+console.log((2.3453).toFixed(2))
+console.log((-34.2).toFixed(5))
