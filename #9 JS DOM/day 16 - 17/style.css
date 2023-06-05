@@ -1,0 +1,309 @@
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%;
+    font-family: 'Bruno Ace', cursive;
+    background-image: linear-gradient(to bottom right, #ff8787,#f03e3e);
+    height: 120vh;
+
+}
+
+.hidden{
+    display: none;
+}
+
+
+.close{
+    position: absolute;
+    color: white;
+    height: 4rem;
+    width: 4rem;
+    top: 6rem;
+    right: 10rem;
+    cursor: pointer;
+}
+
+img{
+    position: absolute;
+    z-index: 999;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.overlay{
+    width: 100%;
+    height: 120vh;
+    position: absolute;
+    z-index: 1000;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9), rgba(0,0,0,0.9));
+}
+
+.modal{
+    margin: 4.8rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 3.4rem;
+    color: white;
+    font-weight: 600;
+    padding: 4.8rem;
+}
+
+.primary-title{
+    font-size: 4.8rem;
+}
+
+.desc{
+    font-size: 2.4rem;
+     width: 80%;
+     line-height: 1.8;
+     letter-spacing: 0.15rem;
+     word-spacing: 1rem;
+
+}
+
+.main-title{
+    color: white;
+    text-align: center;
+    padding-top: 2.4rem;
+}
+
+main{
+    height: 100vh;
+}
+
+.container{
+    overflow: hidden;
+    border-radius: 2rem;
+    max-width: 100rem;
+    height: 56rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: rgba(255, 255, 255, 0.35);
+    margin: 3.6rem auto;
+    position: relative;
+}
+
+.active{
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.player_0, .player_1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+}
+
+.secondary-title{
+    font-size: 3.6rem;
+    margin: 3.6rem auto;
+}
+
+.score-main{
+    font-size: 9.6rem;
+}
+
+.score-active{
+    background-color: rgb(255, 255, 255, 0.9);
+}
+
+center{
+    font-size: 1.8rem;
+}
+
+.current-score-container{
+    height: 30%;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: auto;
+    margin-bottom: 3.6rem;
+    border-radius: 2rem;
+}
+
+.current-score{
+    font-size: 4.8rem;
+}
+
+.btn{
+    height: 5rem;
+    width: 18rem;
+    position: absolute;
+    background-color: white;
+    border: none;
+    outline: none;
+    border-radius: 50rem;
+    font-size: 1.8rem;
+    font-family: inherit;
+    z-index: 999;
+    left: 50%;
+    transform: translate(-50%, 0);
+    cursor: pointer;
+    box-shadow: 0 0 5rem 0.1rem rgba(0, 0, 0, 0.5);
+    transition: all 100ms ease-in-out;
+}
+
+.btn:active{
+    outline: none;
+    scale: 0.98;
+    box-shadow: 0 0 3rem rgb(0, 0, 0, 0.3);
+}
+
+.newgame{
+    margin-top: 2.4rem;
+}
+
+.roll{
+    bottom: 7.8rem;
+    padding-inline: 4.8rem;
+}
+
+footer{
+    font-size: 1.8rem;
+    text-align: center;
+    color: white;
+}
+
+@media screen and (max-width:800px) {
+    main{
+        height: 100%;
+    }
+    html{
+        height: 130vh;
+    }
+    .overlay{
+        padding: 0;
+        margin: 0;
+        height: 200%;
+    }
+    .modal{
+        padding: 0;
+    }
+    .close{
+        top: 2rem;
+        right: 2rem;
+    }
+    .container{
+        grid-template-columns: 1fr;
+        width: 95vw;
+        height: 100%;
+    }
+    .player_0,
+    .player_1{
+        padding: 4.8rem 0;
+        /* padding: 2.4rem 0; */
+        height: 100%;
+    }
+
+    .btn{
+        height: 3.5rem;
+        width: 12rem;
+        padding: 0.7rem 1.4rem;
+        font-size: 1.4rem;
+        rotate: -180deg;
+    }
+
+    .player_0{
+        rotate: 180deg;
+    }
+    /* player 1 active */
+    .player_0_active.newgame{
+        transform: translate(10%, 25%);
+        top: 45%;
+        left: 2rem ;
+    }
+    .player_0_active.roll{
+        left: 100%;
+        transform: translate(110%, -50%);
+        bottom: 50%;
+        right: 0;
+    }
+
+    .player_1_active.newgame{
+        rotate: 360deg;
+        top: 50%;
+        left: 1rem;
+        transform: translate(0%,-110%);
+    }
+    .player_1_active.roll{
+        bottom: 50%;
+        rotate: 360deg;
+        right: 0rem;
+        left: 100%;
+        transform: translate(-110%, 50%);
+    }
+}
+
+@media screen and (max-width:500px){
+    img{
+        aspect-ratio: 1 / 1;
+        height: 20vw;
+    }
+
+    html{
+        height: 115vh;
+    }
+
+    .overlay{
+        height: 116vh;
+    }
+    .modal{
+        margin: 0 auto;
+    }
+    .desc{
+        font-size: 1rem;
+    }
+   
+
+    .close{
+        top: 1rem;
+        right: 1rem;
+        height: 3rem;
+        width: 3rem;
+    }
+
+    .container{
+        margin: 1.8rem auto;
+    }
+    .primary-title{
+        font-size: 2.8rem;
+        padding: 4.8rem 0 1.4rem 0;
+    }
+    .main-title{
+        padding: 2.4rem 0;
+    }
+    .player_0_active.newgame{
+        transform: translate(10%, 50%);
+    }
+
+    .close{
+        top: 1rem;
+    }
+    .btn{
+        font-size: 1rem;
+        width: 9rem;
+    }
+    .score-main{
+        font-size: 5rem;
+    }
+    .secondary-title{
+        font-size: 2.8rem;
+    }
+    .player_0,.player_1{
+        padding: 2.8rem 0;
+    }
+    .current-score{
+        font-size: 2.8rem;
+    }
+}

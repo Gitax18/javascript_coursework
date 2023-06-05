@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%;
+}
+
+body{
+    background-color: #1b1c1e;
+    color: #eee;
+    font-family: 'Playfair Display', serif;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2.4rem 12rem;
+}
+
+.header p{
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.btn{
+    background-color: #555;
+    border: none;
+    color: #eee;
+    padding: 1.4rem 3.6rem;
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    font-family: inherit;
+    border-radius: 1rem;
+    cursor: pointer ;
+}
+
+.main-header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.main-header::after{
+    content: '';
+    width: 100%;
+    border-bottom: 10px solid #666;
+    position: absolute;
+    top: 60%;
+    /* transform: translateY(100%); */
+}
+
+.primary-title{
+    font-size: 5.6rem;
+    font-weight: 800;
+}
+
+.secretNumber{
+    background-color: #eee;
+    color: #222;
+    font-size: 3.6rem;
+    height: 9.6rem;
+    width: 9.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3.6rem auto;
+    font-weight: 700;
+    z-index: 100;
+}
+
+.container{
+    max-width: 130rem;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 2.4rem;
+}
+
+.left{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.4rem;
+}
+
+.input-number{
+    font-size: 3rem !important;
+    padding: 1.4rem;
+    width: 50%;
+}
+
+.right{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 3.6rem;
+}
+
+.secondary-title{
+    font-size: 3.6rem;
+    text-align: center;
+}
+
+.score-container{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: sta;
+}
+
+.score-box,
+.high-score-box{
+    font-size: 2.4rem;
+    font-weight: 500;
+}
+
+.score,
+.highscore{
+    font-size: 3.2rem;
+    font-weight: 900;
+}

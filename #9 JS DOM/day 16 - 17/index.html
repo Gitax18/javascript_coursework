@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diceee - let's Dice it</title>
+    <!-- style sheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="overlay ">
+        <div class="modal">
+            <ion-icon name="close-outline" class="close"></ion-icon>
+            <h1 class="primary-title">👋Welcome to Dicee</h1>
+            <p class="desc">
+                - Click the "Roll" button to roll the dice and accumulate scores. <br> <br>
+                - The current score for each player will be displayed in the respective score container. <br> <br>
+                - If a player rolls a 0, their current score will be reset to 0 and it will be the other player's turn.<br><br>
+                - If a player reaches a score of 50 or higher, the game will declare the winner and the "Roll" button will be disabled. <br><br>
+                - Click the "New Game" button to start a new game after a game has ended. <br><br>
+            </p>
+        </div>
+    </div>
+
+    <main>
+        <h1 class="primary-title main-title">🎲Diceee🎲</h1>
+        <section class="container">
+            <!-- buttons -->
+            <button class="btn newgame player_0_active">New game</button>
+            <button class="btn roll player_0_active">🎲 Roll</button>
+            
+            <!-- dice img  -->
+            <img src="0.png" alt="dice img" class="dice hidden">
+
+            <!-- container -->
+            <div class="player_0 active ">
+                <h2 class="secondary-title player_0_name">Player 1</h2>
+                <span class="player_0_score score-main">0</span>
+                <div class="current-score-container score-active">
+                    <span><center>Dice</center></span>
+                    <span class="current-score player0current">0</span>
+                </div>
+            </div>
+            
+            <div class="player_1 ">
+                <h2 class="secondary-title player_1_name">Player 2</h2>
+                <span class="player_1_score score-main">0</span>
+                <div class="current-score-container ">
+                    <span><center>Dice</center></span>
+                    <span class="current-score player1current">0</span>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <h3>score 50 to win</h3>
+        </footer>
+    </main>
+
+    <!-- javascript -->
+    <script src="script.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+</html>
