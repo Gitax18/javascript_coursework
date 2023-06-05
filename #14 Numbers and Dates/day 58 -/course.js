@@ -56,3 +56,10 @@ console.log(Math.floor(23.3)) // 23
 console.log(Math.floor(23.9)) // 23
 console.log('')
 
+console.log(Math.ceil(-23.3)) // -23
+console.log(Math.ceil(-23.9)) // -23
+console.log('')
+
+console.log(Math.floor(-23.3)) // -24
+console.log(Math.floor(-23.9)) // -24
+console.log('')
