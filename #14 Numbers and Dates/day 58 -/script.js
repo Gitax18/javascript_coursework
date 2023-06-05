@@ -89,7 +89,7 @@ btnLogin.addEventListener('click', function(e){
   const account = accounts.find(acc=> acc.username === inputLoginUsername.value)
   // checking enter pin (if correct inserted relevent data)
 
-  if (account?.pin === Number(inputLoginPin.value)){
+  if (account?.pin === +(inputLoginPin.value)){
     // emptying inputs
     inputLoginUsername.value = ''
     inputLoginPin.value = ''
@@ -121,7 +121,7 @@ btnTransfer.addEventListener('click', function(e){
   e.preventDefault()
 
   const transferAccount = accounts.find((acc)=> inputTransferTo.value === acc.username)
-  const transferAmount = Number(inputTransferAmount.value)
+  const transferAmount = ((+inputTransferAmount.value).toFixed(2))
   
   inputTransferAmount.value = inputTransferTo.value = '';
 
@@ -143,7 +143,7 @@ btnClose.addEventListener('click', function(e){
   e.preventDefault()
 
   const acctToBeClose = inputCloseUsername.value
-  const acctClosePin = Number(inputClosePin.value) 
+  const acctClosePin = +(inputClosePin.value) 
 
   if(acctToBeClose == currentAccount.username &&
     acctClosePin == currentAccount.pin){
@@ -174,7 +174,7 @@ x% of y is z
 */
 btnLoan.addEventListener('click',e=>{
   e.preventDefault()
-  const loanAmt = Number(inputLoanAmount.value)
+  const loanAmt = Math.round(+(inputLoanAmount.value))
 
   const conditionCheck = currentAccount.movements.some(ele => (25 * ele) / 100 >= loanAmt )
   console.log(conditionCheck)
@@ -237,7 +237,7 @@ function displayMovements(movements, sort = false){
         <div class="movements__row">
             <div class="movements__type movements__type--${ type } ">${ ind + 1 } ${ type }</div>
             <!-- <div class="movements__date">3 days ago</div> -->
-            <div class="movements__value">${mov} ₹</div>
+            <div class="movements__value">${Math.trunc(+mov)} ₹</div>
         </div>
         ` 
         containerMovements.insertAdjacentHTML('afterbegin', newHtmlContent)
