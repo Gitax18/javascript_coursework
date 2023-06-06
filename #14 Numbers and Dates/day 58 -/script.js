@@ -79,6 +79,12 @@ createUsername(accounts)
 // setting global variable for current active user
 let currentAccount;
 
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// Faked logged in 
+currentAccount = account1;
+displayUI(currentAccount)
+containerApp.style.opacity = '1'
+
 // ************************ Handling Events ***********************
 
 // managing login user
@@ -106,7 +112,18 @@ btnLogin.addEventListener('click', function(e){
 
     // displaying ui
     displayUI(account)
-    
+
+    // adding date 
+    const now = new Date()
+    const day = `${now.getDate()}`.padStart(2, 0)
+    const month = `${now.getMonth() + 1}`.padStart(2, 0)    
+    const year = `${now.getFullYear()}`
+
+    const hour = `${now.getHours()}`.padStart(2, 0)
+    const min = `${now.getMinutes()}`.padStart(2, 0)
+
+    const labelDateText = `${day}/${month}/${year} ${hour}:${min}`
+    labelDate.textContent = labelDateText
   }else{
     alert(`wrong credentials`)
   }
