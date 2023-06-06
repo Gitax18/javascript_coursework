@@ -76,8 +76,10 @@ console.log(1354234513452345135241453245n)
 
 // ************** DATES *****************
 
-const now = new Date();
+const now = new Date(2037, 10, 19, 15, 23);
 console.log(now.getFullYear())
-console.log(now.getHours())
+console.log(now.getMonth())
+console.log(now.getDate())
+console.log(' ')
 console.log(now.toISOString())
 console.log(now.toUTCString())
