@@ -18,7 +18,7 @@ const account1 = {
     '2020-04-01T10:17:24.185Z',
     '2020-05-08T14:11:59.604Z',
     '2020-05-27T17:01:17.194Z',
-    '2020-07-11T23:36:17.929Z',
+    '2020-07-12T22:03:17.929Z',
     '2020-07-12T10:51:36.790Z',
   ],
   currency: 'EUR',
@@ -39,7 +39,7 @@ const account2 = {
     '2020-02-05T16:33:06.386Z',
     '2020-04-10T14:43:26.374Z',
     '2020-06-25T18:49:59.371Z',
-    '2020-07-26T12:01:20.894Z',
+    '2020-07-26T12:00:20.894Z',
   ],
   currency: 'USD',
   locale: 'en-US',
@@ -212,7 +212,7 @@ let isSort = false
 btnSort.addEventListener('click', (e)=>{
   e.preventDefault()
 
-  displayMovements(currentAccount.movements, !isSort)
+  displayMovements(currentAccount, !isSort)
   isSort = !isSort
 
   // event ends
@@ -225,7 +225,7 @@ btnSort.addEventListener('click', (e)=>{
 // function to display ui
 function displayUI(account){
   // displaying cashflow
-  displayMovements(account.movements)
+  displayMovements(account)
   // calculating deposits, withdraws and balances
   collectsDeposits(account)
   collectsWithdrawals(account)
@@ -238,16 +238,30 @@ function displayUI(account){
 }
 
 // function to display the cash flow movements
-function displayMovements(movements, sort = false){
+function displayMovements(acc, sort = false){
     // emptying the parent container to add new contents
     containerMovements.innerHTML = '';
     
     // checking condition for sort
-    const movs = sort ? movements.slice().sort((a,b)=> a-b) : movements;
-
+    const movs = sort ? acc.movements.slice().sort((a,b)=> a-b) : acc.movements;
     // addin new cash movements from movements array
     movs.forEach((mov, ind) => {
+        /* creating date
 
+        now we have different array for date in movements but
+        no. of movements date and no. of movements are equal so
+        we can use forEach on movements array and use its indexes
+        to manipulate its parallel date (i.e at what date that 
+          movement occur)
+        */
+          const date = new Date(acc.movementsDates[ind])
+          const day = `${date.getDate()}`.padStart(2, 0)
+          const month = `${date.getMonth() + 1}`.padStart(2, 0)    
+          const year = `${date.getFullYear()}`
+      
+      
+          const movementDate= `${day}/${month}/${year}`
+          console.log(movementDate)
         // checking movement type (+ means deposit and - means withdraw)
         const type = mov > 0 ? 'deposit' : 'withdrawal';
 
@@ -255,7 +269,7 @@ function displayMovements(movements, sort = false){
         const newHtmlContent = `
         <div class="movements__row">
             <div class="movements__type movements__type--${ type } ">${ ind + 1 } ${ type }</div>
-            <!-- <div class="movements__date">3 days ago</div> -->
+            <div class="movements__date">${movementDate}</div>
             <div class="movements__value">${Math.trunc(+mov)} ₹</div>
         </div>
         ` 
