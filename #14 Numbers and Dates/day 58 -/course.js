@@ -73,3 +73,11 @@ console.log('')
 console.log(10 % 2)// 10 = 2 * 5 + 0 
 
 console.log(1354234513452345135241453245n)
+
+// ************** DATES *****************
+
+const now = new Date();
+console.log(now.getFullYear())
+console.log(now.getHours())
+console.log(now.toISOString())
+console.log(now.toUTCString())
