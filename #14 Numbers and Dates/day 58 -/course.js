@@ -90,5 +90,8 @@
 // THE SETTIMEOUT()
 /* the setTimeout(callback, milli) is the function we can use to call the function 
 after some time. */
-console.log('After 5 seconds you will see something in console')
-const abc = setTimeout(()=>console.log('This is what you see, f#king nothing😋'), 5000);
+const choice = true
+console.log('After 2 seconds you will see something in console')
+const abc = setTimeout(()=>console.log('This is what you see, f#king nothing😋'), 2000);
+
+if (choice === false) clearTimeout(abc); 
