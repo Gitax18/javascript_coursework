@@ -173,7 +173,6 @@ btnClose.addEventListener('click', function(e){
       const confirmClose = prompt('are you sure to close your account(y/n)')
       if (confirmClose == 'y'){
         const acctIndex = accounts.findIndex((acc)=>acc.username === acctToBeClose)
-        console.log(accounts.splice(acctIndex,1))
         containerApp.style.opacity = '0'
       }
     }
@@ -200,7 +199,6 @@ btnLoan.addEventListener('click',e=>{
   const loanAmt = Math.round(+(inputLoanAmount.value))
 
   const conditionCheck = currentAccount.movements.some(ele => (25 * ele) / 100 >= loanAmt )
-  console.log(conditionCheck)
   if (conditionCheck && loanAmt > 0){
     currentAccount.movements.push(loanAmt)
     currentAccount.movementsDates.push(new Date().toISOString())
@@ -249,7 +247,6 @@ function formatedMovementDate(date){
   }
 
   const days = daysPassed(new Date(), date)
-  console.log(days)
 
   if (days === 0) return 'Today'
   if (days === 1) return 'Yesterday'
@@ -280,19 +277,25 @@ function displayMovements(acc, sort = false){
         */
         const dt = new Date(acc.movementsDates[ind])
         const movementDate = formatedMovementDate(dt)
-        console.log(movementDate)
         // checking movement type (+ means deposit and - means withdraw)
         const type = mov > 0 ? 'deposit' : 'withdrawal';
 
         // new movement row to be add in movements container in index.html
-        const newHtmlContent = `
+        const newHtmlContentSort = `
         <div class="movements__row">
             <div class="movements__type movements__type--${ type } ">${ ind + 1 } ${ type }</div>
             <div class="movements__date">${movementDate}</div>
             <div class="movements__value">${Math.trunc(+mov)} ₹</div>
         </div>
         ` 
-        containerMovements.insertAdjacentHTML('afterbegin', newHtmlContent)
+        const newHtmlContentNotSort = `
+        <div class="movements__row">
+            <div class="movements__type movements__type--${ type } ">${ ind + 1 } ${ type }</div>
+            <div class="movements__value">${Math.trunc(+mov)} ₹</div>
+        </div>
+        ` 
+        if (!sort) containerMovements.insertAdjacentHTML('afterbegin', newHtmlContentSort)
+        else containerMovements.insertAdjacentHTML('afterbegin', newHtmlContentNotSort)
         // containerMovements.innerHTML =    newHtmlContent
     })
 
