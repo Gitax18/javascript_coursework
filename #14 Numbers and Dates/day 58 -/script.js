@@ -148,7 +148,9 @@ btnTransfer.addEventListener('click', function(e){
     transferAccount && // transferring account must be exist 
     currentAccount.balance > transferAmount){ // transfer amount must be less than total balance
       transferAccount.movements.push(transferAmount)
+      transferAccount.movementsDates.push(new Date().toISOString())
       currentAccount.movements.push(-transferAmount)
+      currentAccount.movementsDates.push(new Date().toISOString())
       
       displayUI(currentAccount)
     }else alert('Wrong username, or wrong amount format')
@@ -199,6 +201,7 @@ btnLoan.addEventListener('click',e=>{
   console.log(conditionCheck)
   if (conditionCheck && loanAmt > 0){
     currentAccount.movements.push(loanAmt)
+    currentAccount.movementsDates.push(new Date().toISOString())
     inputLoanAmount.value = ''
     displayUI(currentAccount)
   } else alert('loan amount must not exceed 25% of any deposit')
