@@ -37,52 +37,58 @@
 
 // // ********** RANDOM **********
 
-console.log(Math.PI)
-console.log(Math.random())
+// console.log(Math.PI)
+// console.log(Math.random())
 
 
-//  ************ ROUNDING DOWN / UP ***********
-// round, ceil, floor
+// //  ************ ROUNDING DOWN / UP ***********
+// // round, ceil, floor
 
-console.log(Math.round(23.3)); // 23
-console.log(Math.round(23.9)); // 24
-console.log('');
+// console.log(Math.round(23.3)); // 23
+// console.log(Math.round(23.9)); // 24
+// console.log('');
 
-console.log(Math.ceil(23.3)) // 24
-console.log(Math.ceil(23.9)) // 24
-console.log('')
+// console.log(Math.ceil(23.3)) // 24
+// console.log(Math.ceil(23.9)) // 24
+// console.log('')
 
-console.log(Math.floor(23.3)) // 23
-console.log(Math.floor(23.9)) // 23
-console.log('')
+// console.log(Math.floor(23.3)) // 23
+// console.log(Math.floor(23.9)) // 23
+// console.log('')
 
-console.log(Math.ceil(-23.3)) // -23
-console.log(Math.ceil(-23.9)) // -23
-console.log('')
+// console.log(Math.ceil(-23.3)) // -23
+// console.log(Math.ceil(-23.9)) // -23
+// console.log('')
 
-console.log(Math.floor(-23.3)) // -24
-console.log(Math.floor(-23.9)) // -24
-console.log('')
+// console.log(Math.floor(-23.3)) // -24
+// console.log(Math.floor(-23.9)) // -24
+// console.log('')
 
-console.log((23).toFixed(3))
-console.log((23.8).toFixed(0))
-console.log((2.3453).toFixed(2))
-console.log((-34.26).toFixed(5))
-console.log('')
+// console.log((23).toFixed(3))
+// console.log((23.8).toFixed(0))
+// console.log((2.3453).toFixed(2))
+// console.log((-34.26).toFixed(5))
+// console.log('')
 
-console.log(10 % 2)// 10 = 2 * 5 + 0 
+// console.log(10 % 2)// 10 = 2 * 5 + 0 
 
-console.log(1354234513452345135241453245n)
+// console.log(1354234513452345135241453245n)
 
-// ************** DATES *****************
+// // ************** DATES *****************
 
-const now = new Date(2037, 10, 19, 12, 0 , 45, 54);
-console.log(now.getFullYear())
-console.log(now.getMonth())
-console.log(now.getDate())
-console.log(' ')
-console.log(now.toISOString())
-console.log(now.toUTCString())
-console.log('')
-now.setFullYear(3045)
-console.log(now.toISOString())
+// const now = new Date(2037, 10, 19, 12, 0 , 45, 54);
+// console.log(now.getFullYear())
+// console.log(now.getMonth())
+// console.log(now.getDate())
+// console.log(' ')
+// console.log(now.toISOString())
+// console.log(now.toUTCString())
+// console.log('')
+// now.setFullYear(3045)
+// console.log(now.toISOString())
+
+// THE SETTIMEOUT()
+/* the setTimeout(callback, milli) is the function we can use to call the function 
+after some time. */
+console.log('After 5 seconds you will see something in console')
+const abc = setTimeout(()=>console.log('This is what you see, f#king nothing😋'), 5000);
