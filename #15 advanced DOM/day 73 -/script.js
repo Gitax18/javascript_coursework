@@ -28,3 +28,17 @@ document.addEventListener('keydown', function (e) {
     closeModal();
   }
 });
+
+// ///////////////////////////////////////////////
+
+// first section smooth scrolling
+const scrollBtn = document.querySelector('.btn--scroll-to')
+const scrollToSec = document.querySelector('#section--1') 
+
+scrollBtn.addEventListener('click', (e)=>{
+  e.preventDefault()
+
+  scrollToSec.scrollIntoView({behavior: 'smooth'});
+})
+
+// /////////////////
