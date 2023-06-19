@@ -32,7 +32,7 @@ document.addEventListener('keydown', function (e) {
 // ///////////////////////////////////////////////
 
 // first section smooth scrolling
-const scrollBtn = document.querySelector('.btn--scroll-to')
+const scrollBtn = document.querySelector('.btn--text')
 const scrollToSec = document.querySelector('#section--1') 
 
 scrollBtn.addEventListener('click', (e)=>{
@@ -48,7 +48,6 @@ scrollBtn.addEventListener('click', (e)=>{
 document.querySelector('.nav__links')
         .addEventListener('click', function(e){
           e.preventDefault()
-          
           if(e.target.classList.contains('nav__link')){
             const scrollTo = e.target.getAttribute('href')
             document.querySelector(scrollTo).scrollIntoView({behavior: 'smooth'})
