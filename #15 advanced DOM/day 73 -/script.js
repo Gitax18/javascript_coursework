@@ -1,12 +1,22 @@
 'use strict';
 
-///////////////////////////////////////
-// Modal window
-
 const modal = document.querySelector('.modal');
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
+
+const tabs = [...document.querySelectorAll('.operations__tab')]
+const tab_container = document.querySelector('.operations__tab-container');
+const operation_content = [...document.querySelectorAll('.operations__content')];
+
+
+
+const nav = document.querySelector('.nav');
+const header = document.querySelector('.header');
+const sectionOne = document.querySelector('#section--1');
+///////////////////////////////////////
+// Modal window
+
 
 const openModal = function (e) {
   e.preventDefault()
@@ -57,9 +67,6 @@ document.querySelector('.nav__links')
 
 ////////////////////
 // adding functionalities to tabbed components
-const tabs = [...document.querySelectorAll('.operations__tab')]
-const tab_container = document.querySelector('.operations__tab-container');
-const operation_content = [...document.querySelectorAll('.operations__content')];
 
 // activating tab button
 tab_container.addEventListener('click', (e)=>{
@@ -75,12 +82,13 @@ tab_container.addEventListener('click', (e)=>{
 
 
 // working on links and nav components
-const nav = document.querySelector('.nav');
+
 function handleMouseOverTab(e, opacity){
+  const el = e.target;
+  const siblings = el.closest('.nav').querySelectorAll('.nav__link');
+  const logo = el.closest('.nav').querySelector('.nav__logo')
+  
   if (e.target.classList.contains('nav__link')){
-    const el = e.target;
-    const siblings = el.closest('.nav').querySelectorAll('.nav__link');
-    const logo = el.closest('.nav').querySelector('.nav__logo')
     
     siblings.forEach(sib =>{
       if(sib != el) sib.style.opacity = opacity
@@ -98,8 +106,6 @@ nav.addEventListener('mouseout', (e)=>{
 });
 
 // implementing hide seek navbar according to page location.
-const header = document.querySelector('.header');
-const sectionOne = document.querySelector('#section--1');
 
 const observer = new IntersectionObserver(function(entries, observer){
   const [entry] = entries;
