@@ -75,3 +75,26 @@ tab_container.addEventListener('click', (e)=>{
 
 
 // working on links and nav components
+const nav = document.querySelector('.nav');
+function handleMouseOverTab(e, opacity){
+  if (e.target.classList.contains('nav__link')){
+    const el = e.target;
+    const siblings = el.closest('.nav').querySelectorAll('.nav__link');
+    const logo = el.closest('.nav').querySelector('.nav__logo')
+    
+    siblings.forEach(sib =>{
+      if(sib != el) sib.style.opacity = opacity
+    })
+    logo.style.opacity = opacity
+  }
+}
+
+nav.addEventListener('mouseover', (e)=>{
+  handleMouseOverTab(e, 0.5)
+});
+
+nav.addEventListener('mouseout', (e)=>{
+  handleMouseOverTab(e, 1)
+});
+
+// implementing hide seek navbar according to page location.
