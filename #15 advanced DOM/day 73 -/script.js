@@ -53,3 +53,25 @@ document.querySelector('.nav__links')
               document.querySelector(scrollTo).scrollIntoView({behavior: 'smooth'})
           }
         })
+
+
+////////////////////
+// adding functionalities to tabbed components
+const tabs = [...document.querySelectorAll('.operations__tab')]
+const tab_container = document.querySelector('.operations__tab-container');
+const operation_content = [...document.querySelectorAll('.operations__content')];
+
+// activating tab button
+tab_container.addEventListener('click', (e)=>{
+  const clicked = e.target.closest('.operations__tab')
+  tabs.forEach(tab => tab.classList.remove('operations__tab--active'))
+  clicked.classList.add('operations__tab--active')
+
+  // activating tab content
+  operation_content.forEach(content => content.classList.remove('operations__content--active'));
+  const active_content = document.querySelector(`.operations__content--${clicked.dataset.tab}`);
+  active_content.classList.add('operations__content--active')
+})
+
+
+// working on links and nav components
