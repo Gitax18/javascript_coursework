@@ -90,7 +90,7 @@ function handleMouseOverTab(e, opacity){
 }
 
 nav.addEventListener('mouseover', (e)=>{
-  handleMouseOverTab(e, 0.5)
+  handleMouseOverTab(e, 0.25)
 });
 
 nav.addEventListener('mouseout', (e)=>{
@@ -98,3 +98,15 @@ nav.addEventListener('mouseout', (e)=>{
 });
 
 // implementing hide seek navbar according to page location.
+const header = document.querySelector('.header');
+const sectionOne = document.querySelector('#section--1');
+
+const observer = new IntersectionObserver(function(entries, observer){
+  const [entry] = entries;
+    
+  if(!entry.isIntersecting) nav.classList.add('sticky')
+  else nav.classList.remove('sticky')
+
+}, { root:null, threshold: 0.1, rootMargin: `-${nav.getBoundingClientRect().height}px`})
+
+observer.observe(header);
