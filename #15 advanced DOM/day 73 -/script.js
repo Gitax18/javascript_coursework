@@ -182,18 +182,29 @@ const goToSlide = function(current){
   slides.forEach((slide, ind) =>{
     slide.style.transform = `translateX(${100 * (ind - current)}%)`;
   })
-}
+} 
 
-btnNxtSld.addEventListener('click',()=>{
+const nextSld = ()=>{
   if(curSlide > (slides.length - 2)) curSlide = 0;
   else curSlide++;
 
   goToSlide(curSlide)
-})
+}
 
-btnPreSld.addEventListener('click',()=>{
+const prevSld = ()=>{
   if(curSlide == 0) curSlide = slides.length - 1;
   else curSlide--;
 
   goToSlide(curSlide)
+}
+
+
+btnNxtSld.addEventListener('click',nextSld);
+btnPreSld.addEventListener('click',prevSld);
+
+window.addEventListener('keydown', (e)=>{
+  if (e.key == 'ArrowRight') nextSld()
+  if (e.key == 'ArrowLeft') prevSld()
 })
+
+
