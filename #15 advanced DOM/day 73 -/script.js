@@ -5,15 +5,24 @@ const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.btn--close-modal');
 const btnsOpenModal = document.querySelectorAll('.btn--show-modal');
 
+
 const tabs = [...document.querySelectorAll('.operations__tab')]
 const tab_container = document.querySelector('.operations__tab-container');
 const operation_content = [...document.querySelectorAll('.operations__content')];
 
 
-
 const nav = document.querySelector('.nav');
 const header = document.querySelector('.header');
 const sectionOne = document.querySelector('#section--1');
+
+
+const sections = document.querySelectorAll('.section');
+
+
+const slides = document.querySelectorAll('.slide');
+const btnNxtSld = document.querySelector('.slider__btn--right');
+const btnPreSld = document.querySelector('.slider__btn--left');
+
 ///////////////////////////////////////
 // Modal window
 
@@ -107,7 +116,7 @@ nav.addEventListener('mouseout', (e)=>{
 
 // implementing hide seek navbar according to page location.
 
-const observer = new IntersectionObserver(function(entries, observer){
+const headerObserver = new IntersectionObserver(function(entries, observer){
   const [entry] = entries;
     
   if(!entry.isIntersecting) nav.classList.add('sticky')
@@ -115,4 +124,77 @@ const observer = new IntersectionObserver(function(entries, observer){
 
 }, { root:null, threshold: 0.1, rootMargin: `-${nav.getBoundingClientRect().height}px`})
 
-observer.observe(header);
+headerObserver.observe(header);
+
+
+// implementing sections show up on scrolling.
+
+function revealSection(entries, observer){
+  const [entry] = entries;
+  if(!entry.isIntersecting) return
+  entry.target.classList.remove('section--hidden');
+  observer.unobserve(entry.target)
+}
+
+const sectionObserver = new IntersectionObserver(revealSection, {root:null, threshold:0.1}) 
+
+
+sections.forEach(sec =>{
+  // sectionObserver.observe(sec)
+  sec.classList.remove('section--hidden')
+})
+
+// lazy loading images
+
+const images = document.querySelectorAll('.features__img');
+
+function lazyImgLoader(entries, observer){
+    const [entry] = entries;
+
+    if(!entry.isIntersecting) return
+
+    entry.target.src = entry.target.dataset.src;
+
+    entry.target.addEventListener('load', ()=>{
+      entry.target.classList.remove('lazy-img');
+    })
+
+    observer.unobserve(entry.target);
+}
+
+const options = {
+  threshold: 0.9
+}
+
+const imageObserver = new IntersectionObserver(lazyImgLoader, options)
+
+images.forEach(img => imageObserver.observe(img));
+
+// implementing testimonial section slider
+
+
+let curSlide = 0;
+
+slides.forEach((slide, ind) =>{
+  slide.style.transform = `translateX(${ind * 100}%)`;
+})
+
+btnNxtSld.addEventListener('click',()=>{
+  if(curSlide > (slides.length - 2)) curSlide = 0;
+  else curSlide++;
+
+  slides.forEach((slide, ind) =>{
+    slide.style.transform = `translateX(${100 * (ind - curSlide)}%)`;
+  })
+
+})
+
+btnPreSld.addEventListener('click',()=>{
+  if(curSlide == 0) curSlide = slides.length - 1;
+  else curSlide--;
+
+  slides.forEach((slide, ind) =>{
+    slide.style.transform = `translateX(${100 * (ind - curSlide)}%)`;
+  })
+
+})
