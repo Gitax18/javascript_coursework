@@ -11,5 +11,12 @@ function Person(firstName, lastName, birthYear){
 }
 
 const gitanshu = new Person('Gitanshu', 'Sankhla', 2004);
+Person.prototype.description = function(){
+    return `${this.firstName} ${this.lastName} is ${this.age()} years old.`
+}
 
-console.log(gitanshu)
+Person.prototype.species = "Homosapiens"
+
+console.log(gitanshu.description());
+// console.log(gitanshu.__proto__ === Person.prototype);
+console.log(Person.prototype)
