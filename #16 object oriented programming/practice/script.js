@@ -25,6 +25,7 @@ Car.prototype.description = function(){
 }
 
 const lambo = new Car('Lamborghini', 'Lime-Yellow', 'Huracan', 360, 20, 40);
+/*
 console.log(lambo.stop());
 console.log(lambo.move());
 console.log(lambo.move());
@@ -41,4 +42,32 @@ console.log(lambo.description())
 console.log(lambo.stop());
 console.log(lambo.description())
 console.log(lambo)
+*/
+
+class Person{
+    constructor(name, birthYear){
+        this.name = name;
+        this.birthYear = birthYear;
+    }
+
+    get age(){
+        return new Date().getFullYear() - this.birthYear;
+    }
+
+    set _profession(prof){
+        this.profession = prof;
+    }
+    
+}
+
+
+const gitanshu = new Person('Gitanshu Sankhla', 2004);
+console.log(gitanshu);
+console.log(gitanshu.age);
+gitanshu.profession = 'SDE'
+console.log(gitanshu.profession);
+
+console.log(gitanshu);
+
+
 
