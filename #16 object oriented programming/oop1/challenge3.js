@@ -34,7 +34,6 @@ Car.prototype.brake = function(){
 }
 
 function EV(make, speed, charge){
-
     Car.call(this, make, speed)
     this.charge = charge;
 }
