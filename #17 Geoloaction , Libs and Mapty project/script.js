@@ -11,4 +11,4 @@ function success(position){
 
 function failed(){
     alert("Can't access position")
-}
+}          
