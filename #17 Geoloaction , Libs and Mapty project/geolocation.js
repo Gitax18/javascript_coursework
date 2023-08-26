@@ -1,3 +1,5 @@
+'use strict';
+
 navigator.geolocation.getCurrentPosition(success, failed)
 
 function success(position){
