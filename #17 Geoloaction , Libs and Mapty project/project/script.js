@@ -12,6 +12,53 @@ const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 let map, mapEvt;
 
+// ***************** WORKOUT ARCHITECTURE
+class Workout{
+
+  date = new Date();
+  id = (Date.now() + "").slice(-5);
+
+  constructor(coords, duration, distance){
+    this.coords = coords;
+    this.duration = duration;
+    this.distance = distance;
+  }
+}
+
+// **************  Child class of Workout (for running)
+class Running extends Workout{
+  constructor(coords, duration, distance, cadence){
+    super(coords, duration, distance);
+    this.cadence = cadence;
+    this._calcPace();
+  }
+  
+  _calcPace(){
+    this.pace =  this.duration / this.distance;
+    return this.pace;
+  }
+}
+
+// **************  Child class of Workout (for cycling)
+class Cycling extends Workout{
+  constructor(coords, duration, distance, elevGain){
+    super(coords, duration, distance);
+    this.elevGain = elevGain;
+    this._calcSpeed();
+  }
+  
+  _calcSpeed(){
+    this.speed =  this.distance / (this.duration / 60);
+    return this.speed;
+  }
+} 
+
+const run = new Running([23.2313, 75.231], 50, 2, 125);
+const cyc = new Cycling([23.2313, 75.231], 95, 12, 545);
+console.log(run, cyc);
+
+
+// ******************* APPLICATION ARCHITECHTURE **************************
 class App{
   #map;
   #mapEvt;
@@ -94,7 +141,7 @@ class App{
       inputCadence.value = inputDistance.value = inputDuration.value = inputElevation.value = "";
       
       // hiding form again after submission
-      this.classList.add('hidden').bind(form);
+      form.classList.add('hidden');
   }
 }
 
