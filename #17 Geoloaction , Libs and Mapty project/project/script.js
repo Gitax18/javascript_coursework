@@ -27,6 +27,7 @@ class Workout{
 
 // **************  Child class of Workout (for running)
 class Running extends Workout{
+  type = 'running';
   constructor(coords, duration, distance, cadence){
     super(coords, duration, distance);
     this.cadence = cadence;
@@ -41,6 +42,7 @@ class Running extends Workout{
 
 // **************  Child class of Workout (for cycling)
 class Cycling extends Workout{
+  type = 'cycling';
   constructor(coords, duration, distance, elevGain){
     super(coords, duration, distance);
     this.elevGain = elevGain;
@@ -53,19 +55,17 @@ class Cycling extends Workout{
   }
 } 
 
-const run = new Running([23.2313, 75.231], 50, 2, 125);
-const cyc = new Cycling([23.2313, 75.231], 95, 12, 545);
-console.log(run, cyc);
+
 
 
 // ******************* APPLICATION ARCHITECHTURE **************************
 class App{
   #map;
   #mapEvt;
+  #workouts = [];
 
   constructor(){
     this._getPosition();
-
     form.addEventListener('submit', this._newWorkout.bind(this));
 
     // chcnging input field on form according to the user workout.
@@ -121,28 +121,85 @@ class App{
   }
 
   _newWorkout(e){
-    e.preventDefault(); // preventing form reload
+      e.preventDefault(); // preventing form reload
     
       const {lat,lng} = this.#mapEvt.latlng; // getting coords of clicked location
-    
-      L.marker([lat, lng]) // generating marker on clicked coordinates
-                .addTo(this.#map) // adding marker to map
-                .bindPopup(L.popup({ // custominzing popup (i.e. marker)
-                    maxWidth: 380,
-                    minWidth: 100,
-                    className: 'running-popup',
-                    autoClose: false,
-                    closeOnClick: false,
-                }))
-                .setPopupContent('🏃‍♀️Running🏃‍♂️') // setting inner HTML of the marker
-                .openPopup();
-    
+      let workout;
+      // get data from form
+      const type = inputType.value;
+      const distance= inputDistance.value;
+      const duration = inputDuration.value;
+       
+
+      // check if data is valid
+      const isValid = (...inputs) => inputs.every(inp => Number.isFinite(inp) );
+      const isPositive = (...inputs) => inputs.every(inp => Number(inp) > 0);
+
+      // if workout is running, create running object
+      if (type == 'running'){
+        const cadence = inputCadence.value;
+        if(isValid(distance, duration, cadence) 
+          || !isPositive(distance, duration, cadence))
+        { 
+            return alert("Please enter positive value")
+        }
+
+        workout = new Running([lat, lng], duration, distance, cadence);
+      }
+      
+      // if workout is cycling, create cycling object
+      if (type == 'cycling'){
+        let elevation = inputElevation.value;
+        if(isValid(distance, duration, elevation) 
+        || !isPositive(distance, duration)
+        || elevation == ""
+        || `${Number(elevation)}` == 'NaN')
+        {
+          return alert("Please enter positive value")
+        }
+        // console.log(Number(elevation) == NaN)
+        workout = new Cycling([lat, lng], duration, distance, elevation);
+      }
+
+      // add new object to workout array
+      this.#workouts.push(workout);
+      // console.log(this.#workouts)
+
+      // render new workout marker
+      this._renderWorkoutMarker(workout)
+
+      // render workout on list 
+
       // emptying all inputs
       inputCadence.value = inputDistance.value = inputDuration.value = inputElevation.value = "";
       
       // hiding form again after submission
+      form.style.display = 'none';
       form.classList.add('hidden');
+      setTimeout(()=>{
+        form.style.display = 'grid';
+      }, 1000)
   }
+
+  _renderWorkoutMarker(workout){
+    console.log(workout)
+
+    // render workout on map as a marker
+    L.marker(workout.coords) // generating marker on clicked coordinates
+    .addTo(this.#map) // adding marker to map
+    .bindPopup(L.popup({ // custominzing popup (i.e. marker)
+        maxWidth: 380,
+        minWidth: 100,
+        className: `${workout.type}-popup`,
+        autoClose: false,
+        closeOnClick: false,
+    }))
+    .setPopupContent(`${workout.type}`) // setting inner HTML of the marker
+    .openPopup();
+
+  }
+
+  
 }
 
 const app = new App();
