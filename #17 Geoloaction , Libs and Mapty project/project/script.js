@@ -72,7 +72,7 @@ class App{
   #map;
   #mapEvt;
   #workouts = [];
-  #mapZoom = 10;
+  #mapZoom = 13;
 
   constructor(){
     this._getPosition();
@@ -80,6 +80,8 @@ class App{
 
     // chcnging input field on form according to the user workout.
     inputType.addEventListener('change', this._toggleElevationField)
+
+    this._getLocalStorage()
 
     containerWorkouts.addEventListener('click', this._moveToPopup.bind(this))
   }
@@ -110,6 +112,10 @@ class App{
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.#map);
+
+    this.#workouts.forEach(work =>{
+      this._renderWorkoutMarker(work);
+    })
    
     /**
     Adding event listener to map
@@ -173,15 +179,16 @@ class App{
         workout = new Cycling([lat, lng], duration, distance, elevation);
       }
 
-      // add new object to workout array
+      // add new object to workout array and array to localstorage
       this.#workouts.push(workout);
-      console.log(workout)
+      this._setLocalStorage(this.#workouts);
 
       // render new workout marker
       this._renderWorkoutMarker(workout)
 
       // render workout on list 
       this._renderWorkout(workout)
+
 
       // emptying all inputs
       inputCadence.value = inputDistance.value = inputDuration.value = inputElevation.value = "";
@@ -274,6 +281,24 @@ class App{
       }
     })
   }  
+
+  _setLocalStorage(){
+    const data = JSON.stringify(this.#workouts);
+    // console.log(data)
+    localStorage.setItem('workouts', data);
+  }
+
+  _getLocalStorage(){
+    const data = JSON.parse(localStorage.getItem('workouts'));
+    console.log(data);
+
+    if(!data) return
+    this.#workouts = data;
+
+    this.#workouts.forEach(work =>{
+      this._renderWorkout(work);
+    })
+  }
   
 }
 
