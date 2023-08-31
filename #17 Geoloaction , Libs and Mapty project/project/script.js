@@ -72,6 +72,7 @@ class App{
   #map;
   #mapEvt;
   #workouts = [];
+  #mapZoom = 10;
 
   constructor(){
     this._getPosition();
@@ -79,6 +80,8 @@ class App{
 
     // chcnging input field on form according to the user workout.
     inputType.addEventListener('change', this._toggleElevationField)
+
+    containerWorkouts.addEventListener('click', this._moveToPopup.bind(this))
   }
 
   _getPosition(){
@@ -100,7 +103,7 @@ class App{
     const coords = [latitude, longitude]; // converting coords to array
 
     // loading map on current coords with zoom (here Map zoom is 10)
-    this.#map = L.map('map').setView(coords, 10); 
+    this.#map = L.map('map').setView(coords, this.#mapZoom); 
 
     // adding custom map theme to map, known as tile
     L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
@@ -257,7 +260,20 @@ class App{
   form.insertAdjacentHTML('afterend', html);
   }
 
-  
+  _moveToPopup(e){
+    const workoutEl = e.target.closest('.workout');
+
+    if (!workoutEl) return
+
+    const workout = this.#workouts.find(wk => wk.id === workoutEl.dataset.id);
+
+    this.#map.setView(workout.coords, this.#mapZoom, {
+      animate: true,
+      pan:{
+        duration: 1,
+      }
+    })
+  }  
   
 }
 
