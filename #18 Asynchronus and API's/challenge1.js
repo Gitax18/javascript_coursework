@@ -44,3 +44,63 @@ Test data:
 - Coordinates 3: -33.933, 18.474 
 
  */
+
+// API key: 	116024343300461110876x95402
+
+const countriesContainer = document.querySelector('.countries');
+
+// function to get user location based on coordinates
+function whereAmI(lat, lng){
+    const apiLink = `https://geocode.xyz/${lat},${lng}?geoit=json&auth=116024343300461110876x95402`;
+    fetch(apiLink)
+        .then(response => {
+            if(!response.ok) throw new Error("Error while retriving data")
+            return response.json()
+        })
+        .then(data => {
+            if(data.error != undefined) throw new Error("Error occured please check coordinates")
+            console.log(data)   
+            console.log(`You live in ${data.city}, ${data.state}, ${data.country} `)
+            renderCountry(data.country)
+        })
+        .catch(err => console.log(`An Error ocuured while fetching data, ${err}`))
+}
+
+// function to render country flag
+function renderCountry(country){
+    fetch(`https://restcountries.com/v3.1/name/${country.toLowerCase()}`)
+        .then(response => {
+            if(!response.ok) throw new Error("Error while retriving data")
+            return response.json()
+        })
+        .then(dt => {
+            const data = dt[0]
+            const html = `
+            <article class="country">
+                <img class="country__img" src="${data.flags['png']}" />
+                <div class="country__data">
+                    <h3 class="country__name">${data.name["common"]}</h3>
+                    <h4 class="country__region">${data.region}</h4>
+                    <p class="country__row"><span>👫</span>${(data.population / 1000000).toFixed(2)} Mn people</p>
+                    <p class="country__row"><span>🗣️</span>${Object.values(data.languages)[0]}</p>
+                    <p class="country__row"><span>💰</span>${Object.values(data.currencies)[0].name}</p>
+                </div>
+            </article>
+            `
+            console.log(Object.values(data.currencies)[0].symbol)
+            countriesContainer.insertAdjacentHTML('beforeend', html);
+        })
+        .catch(err => console.error('Error Occured: ' + err))
+        .finally(countriesContainer.style.opacity = '1')
+}
+
+
+// getting user position 
+navigator.geolocation.getCurrentPosition((pos)=>{
+    const lat = pos.coords.latitude
+    const lng = pos.coords.longitude
+    // whereAmI(lat, lng)
+    // whereAmI(52.508, 13.381)
+    // whereAmI(19.037, 72.873)
+    whereAmI(-33.933, 18.474 )
+})

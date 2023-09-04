@@ -17,7 +17,7 @@ function requestCountryData(country){
     request.addEventListener('load', function(){
         const [data] = JSON.parse(request.responseText);
         console.log(data);
-    
+
         const html = `
         <article class="country">
             <img class="country__img" src="${data.flags['png']}" />
