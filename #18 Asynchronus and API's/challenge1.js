@@ -59,7 +59,6 @@ function whereAmI(lat, lng){
         })
         .then(data => {
             if(data.error != undefined) throw new Error("Error occured please check coordinates")
-            console.log(data)   
             console.log(`You live in ${data.city}, ${data.state}, ${data.country} `)
             renderCountry(data.country)
         })
@@ -87,7 +86,6 @@ function renderCountry(country){
                 </div>
             </article>
             `
-            console.log(Object.values(data.currencies)[0].symbol)
             countriesContainer.insertAdjacentHTML('beforeend', html);
         })
         .catch(err => console.error('Error Occured: ' + err))
@@ -100,7 +98,7 @@ navigator.geolocation.getCurrentPosition((pos)=>{
     const lat = pos.coords.latitude
     const lng = pos.coords.longitude
     // whereAmI(lat, lng)
-    // whereAmI(52.508, 13.381)
-    // whereAmI(19.037, 72.873)
+    whereAmI(52.508, 13.381)
+    whereAmI(19.037, 72.873)
     whereAmI(-33.933, 18.474 )
 })
